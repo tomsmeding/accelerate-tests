@@ -42,4 +42,5 @@ test = mkTestOn "nondet-stencil" "Inter-kernel synchronisation bug" [PTX] $ \run
   forM_ [1..50000::Int] $ \i -> do
     runtest_stencil runN len 0
     when (i `mod` 100 == 0) $ lift $ putChar '*' >> hFlush stdout
+  lift $ putChar '\n'
   return True
