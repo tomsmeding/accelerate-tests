@@ -1,0 +1,45 @@
+cabal-version:   3.0
+name:            accelerate-tests
+version:         0.1.0.0
+license:         BSD-3-Clause
+author:          The Accelerate Team
+maintainer:      Tom Smeding <xhackage@tomsmeding.com>
+copyright:       2025 The Accelerate Team
+build-type:      Simple
+
+flag native
+  description: Test the accelerate-llvm-native backend
+  default: True
+  manual: True
+
+flag ptx
+  description: Test the accelerate-llvm-ptx backend
+  default: True
+  manual: True
+
+executable accelerate-tests
+  main-is: Main.hs
+  other-modules:
+    Data.Array.Accelerate.Tests.Config
+    Data.Array.Accelerate.Tests
+    Data.Array.Accelerate.Tests.Prog.NondetScanlseg
+    Data.Array.Accelerate.Tests.Prog.NondetStencil
+    Data.Array.Accelerate.Tests.Prog.NondetSumhang
+    Data.Array.Accelerate.Tests.Types
+    Data.Array.Accelerate.Tests.Util
+  build-depends:
+    base >=4.14,
+    accelerate,
+    containers,
+    transformers
+  hs-source-dirs: src
+  default-language: Haskell2010
+  ghc-options: -Wall -threaded
+
+  if flag(native)
+    build-depends: accelerate-llvm-native
+    cpp-options: -DACC_TEST_NATIVE
+
+  if flag(ptx)
+    build-depends: accelerate-llvm-ptx
+    cpp-options: -DACC_TEST_PTX

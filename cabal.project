@@ -1,0 +1,31 @@
+packages:
+  .
+
+constraints:
+  accelerate +nofib,
+  accelerate-tests +native +ptx
+
+source-repository-package
+  type: git
+  location: https://github.com/AccelerateHS/accelerate
+  -- master
+  tag: bca75e0aac05630009cb315796ee1a28b4af15d4
+
+source-repository-package
+  type: git
+  location: https://github.com/tomsmeding/accelerate-llvm
+  -- no-link-llvm-ptx
+  tag: 8c9c293f63e18e900f8c3bb5d9ac37aba6ff9299
+  subdir: accelerate-llvm accelerate-llvm-native accelerate-llvm-ptx
+
+source-repository-package
+  type: git
+  location: https://github.com/tomsmeding/llvm-pretty
+  -- ptx
+  tag: 44dccc90e0b0e56d7812b2cff8bd67baa216cfeb
+
+source-repository-package
+  type: git
+  location: https://github.com/tomsmeding/cuda
+  -- cuda-12
+  tag: 26083f0d000076d3bba6c462952820ccad318c65
