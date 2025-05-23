@@ -146,10 +146,6 @@ main = do
               Nothing -> backends
               Just intent -> filter ((`Set.member` intent) . fst) backends
 
-  let multipleTests = case tests of
-                        _:_:_ -> True
-                        _ -> False
-
   istty <- hIsTerminalDevice stdout
   let fmtMsg s | istty = "\x1B[1m" ++ s ++ "\x1B[0m"
                | otherwise = s
@@ -159,8 +155,7 @@ main = do
   allok <-
     fmap and . forM tests $ \test ->
       fmap and . forM (decideBackends (testTargets test)) $ \(tgt, Config.Backend runN) -> do
-        when multipleTests $
-          putStrLn $ fmtMsg $ "# " ++ testName test ++ " on " ++ unparseTarget tgt
+        putStrLn $ fmtMsg $ "# " ++ testName test ++ " on " ++ unparseTarget tgt
         ok <- testFunction test runN
         when (not ok) $ do
           putStrLn $ fmtErr $ "## Failed test " ++ testName test
