@@ -6,7 +6,7 @@ import Data.Array.Accelerate.Tests.Types
 
 
 test :: Test
-test = mkTestOn "nondet-sumhang" [PTX] $ \runN -> do
+test = mkTestOn "nondet-sumhang" "Hangs with accelerate-llvm#97 on jizo" [PTX] $ \runN -> do
   let arr = A.fromList (Z :. 257 :. 31) [1::Int ..]
   putStrLn "running:"
   print $ length $ show $ runN (A.scanl1 (+)) arr

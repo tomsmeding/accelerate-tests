@@ -110,7 +110,8 @@ main = do
       putStrLn $ testName test ++
                  (case testTargets test of
                     Nothing -> ""
-                    Just tgts -> "  for: " ++ intercalate ", " (map unparseTarget (Foldable.toList tgts)))
+                    Just tgts -> " [" ++ intercalate ", " (map unparseTarget (Foldable.toList tgts)) ++ "]") ++
+                 " (" ++ testDescription test ++ ")"
     exitSuccess
 
   when (optsListTargets opts) $ do

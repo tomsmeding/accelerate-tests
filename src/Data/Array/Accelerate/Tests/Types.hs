@@ -26,13 +26,14 @@ unparseTarget PTX = "ptx"
 -- on all targets. The function should return whether the test was successful.
 data Test = Test
   { testName :: String
+  , testDescription :: String
   , testTargets :: Maybe (Set Target)
   , testFunction :: RunN -> IO Bool }
 
 -- | A test that runs on all targets.
-mkTest :: String -> (RunN -> IO Bool) -> Test
-mkTest name f = Test name Nothing f
+mkTest :: String -> String -> (RunN -> IO Bool) -> Test
+mkTest name descr f = Test name descr Nothing f
 
 -- | A test that runs on some targets only.
-mkTestOn :: String -> [Target] -> (RunN -> IO Bool) -> Test
-mkTestOn name targets f = Test name (Just (Set.fromList targets)) f
+mkTestOn :: String -> String -> [Target] -> (RunN -> IO Bool) -> Test
+mkTestOn name descr targets f = Test name descr (Just (Set.fromList targets)) f

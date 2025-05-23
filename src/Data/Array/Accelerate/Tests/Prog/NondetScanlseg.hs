@@ -42,7 +42,7 @@ runtest_scanlseg runN x = do
             exitEarly False
 
 test :: Test
-test = mkTestOn "nondet-scanlseg" [PTX] $ \runN -> runExitEarly $ do
+test = mkTestOn "nondet-scanlseg" "Was buggy before accelerate-llvm#97" [PTX] $ \runN -> runExitEarly $ do
   forM_ [1..500::Int] $ \i -> do
     runtest_scanlseg runN 0
     when (i `mod` 100 == 0) $ lift $ putChar '\n'

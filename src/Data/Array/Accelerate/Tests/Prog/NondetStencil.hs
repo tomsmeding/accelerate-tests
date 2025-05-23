@@ -36,7 +36,7 @@ runtest_stencil runN len x = do
             exitEarly False
 
 test :: Test
-test = mkTestOn "nondet-stencil" [PTX] $ \runN -> runExitEarly $ do
+test = mkTestOn "nondet-stencil" "Inter-kernel synchronisation bug" [PTX] $ \runN -> runExitEarly $ do
   let len = 4
   lift $ putStrLn $ show (stencil_correct_answer len 0) ++ " (<- correct)"
   forM_ [1..50000::Int] $ \i -> do
