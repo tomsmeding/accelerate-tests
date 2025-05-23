@@ -22,6 +22,8 @@ executable accelerate-tests
   other-modules:
     Data.Array.Accelerate.Tests.Config
     Data.Array.Accelerate.Tests
+    Data.Array.Accelerate.Tests.Prog.ADBenchGMMGrad
+    Data.Array.Accelerate.Tests.Prog.ADBenchGMMGrad.Acc
     Data.Array.Accelerate.Tests.Prog.NondetScanlseg
     Data.Array.Accelerate.Tests.Prog.NondetStencil
     Data.Array.Accelerate.Tests.Prog.NondetSumhang
